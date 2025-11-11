@@ -8,7 +8,7 @@ import { usePathname, useSearchParams } from 'next/navigation';
 import { themeType } from '@/app/lib/theme';
 
 export default function Pagination({ 
-  totalPages,
+  totalPages, 
   theme
 }: 
 { 
@@ -129,7 +129,7 @@ function PaginationArrow({
       ${!isDisabled && `${theme.hoverBorder} ${theme.hoverBg} ${theme.hoverText}`}
     `,
     {
-      'pointer-events-none': isDisabled,
+      'pointer-events-none text-gray-300': isDisabled,
       'mr-2 md:mr-4': direction === 'left',
       'ml-2 md:ml-4': direction === 'right',
     },

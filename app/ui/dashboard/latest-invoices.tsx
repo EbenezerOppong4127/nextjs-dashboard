@@ -1,43 +1,46 @@
 import { ArrowPathIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
-import Image from 'next/image';
 import { lusitana } from '@/app/ui/fonts';
-import { LatestInvoice } from '@/app/lib/definitions';
-export default async function LatestInvoices({
-  latestInvoices,
-}: {
-  latestInvoices: LatestInvoice[];
-}) {
+import { fetchLatestInvoices } from '@/app/lib/data';
+import { themeType } from '@/app/lib/theme';
+
+export default async function LatestInvoices({theme}:{theme: themeType}) {
+  let latestInvoices = [];
+  try {
+    latestInvoices = await fetchLatestInvoices() || [];
+  } catch (error) {
+    console.error('Error fetching latest invoices:', error);
+    latestInvoices = [];
+  }
+
   return (
     <div className="flex w-full flex-col md:col-span-4">
-      <h2 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
+      <h2 className={`${lusitana.className} mb-4 text-xl md:text-2xl ${theme.title}`}>
         Latest Invoices
       </h2>
-      <div className="flex grow flex-col justify-between rounded-xl bg-gray-50 p-4">
-        {/* NOTE: Uncomment this code in Chapter 7 */}
+      <div className={`flex grow flex-col justify-between rounded-xl
+        ${theme.container} p-4
+      `}>
+        {/* NOTE: comment in this code when you get to this point in the course */}
 
-        {/* <div className="bg-white px-6">
-          {latestInvoices.map((invoice, i) => {
+        <div className={`${theme.bg} px-6`}>
+          {latestInvoices && latestInvoices.length > 0 ? (
+            latestInvoices.map((invoice, i) => {
             return (
               <div
                 key={invoice.id}
                 className={clsx(
-                  'flex flex-row items-center justify-between py-4',
+                  `flex flex-row items-center justify-between py-4
+                    ${theme.border}
+                  `,
                   {
                     'border-t': i !== 0,
                   },
                 )}
               >
                 <div className="flex items-center">
-                  <Image
-                    src={invoice.image_url}
-                    alt={`${invoice.name}'s profile picture`}
-                    className="mr-4 rounded-full"
-                    width={32}
-                    height={32}
-                  />
                   <div className="min-w-0">
-                    <p className="truncate text-sm font-semibold md:text-base">
+                    <p className={`truncate text-sm font-semibold md:text-base ${theme.title}`}>
                       {invoice.name}
                     </p>
                     <p className="hidden text-sm text-gray-500 sm:block">
@@ -46,14 +49,20 @@ export default async function LatestInvoices({
                   </div>
                 </div>
                 <p
-                  className={`${lusitana.className} truncate text-sm font-medium md:text-base`}
-                >
+                  className={`${lusitana.className} truncate text-sm font-medium md:text-base 
+                    ${theme.title}
+                  `}>
                   {invoice.amount}
                 </p>
               </div>
             );
-          })}
-        </div> */}
+          })
+          ) : (
+            <div className="py-8 text-center">
+              <p className={`text-sm ${theme.text}`}>No invoices found.</p>
+            </div>
+          )}
+        </div>
         <div className="flex items-center pb-2 pt-6">
           <ArrowPathIcon className="h-5 w-5 text-gray-500" />
           <h3 className="ml-2 text-sm text-gray-500 ">Updated just now</h3>
