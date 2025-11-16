@@ -309,24 +309,23 @@ export async function fetchCustomersPages(query: string) {
   }
 }
 
-export async function fetchCustomerById(id: string) {
+export async function fetchCustomerById(id: string, userEmail: string) {
   noStore();
-  
+
   try {
     const customer = await sql<CustomerForm>`
       SELECT
         id, name, email
       FROM customers
       WHERE
-        id = ${id};
+        id = ${id}
+        AND user_email = ${userEmail};
     `;
 
     return customer.rows[0];
   } catch (error) {
     console.error('Database Error:', error);
-    // throw new Error('Failed to fetch customer.');
-
-    return false // we can't return an error, because it can break the not-found functionality at app\dashboard\invoices\[id]\edit\not-found.tsx
+    return false
   }
 }
 
