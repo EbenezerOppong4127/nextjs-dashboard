@@ -15,7 +15,8 @@ export default async function Page({ params }: { params: { id: string } }) {
   // Use default light theme since auth is removed
   const theme: themeType = lightTheme;
 
-  let invoice, customers;
+  let invoice: any;
+  let customers: any[] = [];
   try {
     [invoice, customers] = await Promise.all([
       fetchInvoiceById(id),
