@@ -4,8 +4,19 @@ import { lusitana } from '@/app/ui/fonts';
 import { fetchLatestInvoices } from '@/app/lib/data';
 import { themeType } from '@/app/lib/theme';
 
+// Define the Invoice type based on your data structure
+interface Invoice {
+  id: string;
+  name: string;
+  email: string;
+  amount: string;
+  // Add other properties as needed from your actual data
+}
+
 export default async function LatestInvoices({theme}:{theme: themeType}) {
-  let latestInvoices = [];
+  // Initialize with proper typing
+  let latestInvoices: Invoice[] = [];
+
   try {
     latestInvoices = await fetchLatestInvoices() || [];
   } catch (error) {
@@ -26,37 +37,37 @@ export default async function LatestInvoices({theme}:{theme: themeType}) {
         <div className={`${theme.bg} px-6`}>
           {latestInvoices && latestInvoices.length > 0 ? (
             latestInvoices.map((invoice, i) => {
-            return (
-              <div
-                key={invoice.id}
-                className={clsx(
-                  `flex flex-row items-center justify-between py-4
+              return (
+                <div
+                  key={invoice.id}
+                  className={clsx(
+                    `flex flex-row items-center justify-between py-4
                     ${theme.border}
                   `,
-                  {
-                    'border-t': i !== 0,
-                  },
-                )}
-              >
-                <div className="flex items-center">
-                  <div className="min-w-0">
-                    <p className={`truncate text-sm font-semibold md:text-base ${theme.title}`}>
-                      {invoice.name}
-                    </p>
-                    <p className="hidden text-sm text-gray-500 sm:block">
-                      {invoice.email}
-                    </p>
+                    {
+                      'border-t': i !== 0,
+                    },
+                  )}
+                >
+                  <div className="flex items-center">
+                    <div className="min-w-0">
+                      <p className={`truncate text-sm font-semibold md:text-base ${theme.title}`}>
+                        {invoice.name}
+                      </p>
+                      <p className="hidden text-sm text-gray-500 sm:block">
+                        {invoice.email}
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <p
-                  className={`${lusitana.className} truncate text-sm font-medium md:text-base 
+                  <p
+                    className={`${lusitana.className} truncate text-sm font-medium md:text-base 
                     ${theme.title}
                   `}>
-                  {invoice.amount}
-                </p>
-              </div>
-            );
-          })
+                    {invoice.amount}
+                  </p>
+                </div>
+              );
+            })
           ) : (
             <div className="py-8 text-center">
               <p className={`text-sm ${theme.text}`}>No invoices found.</p>

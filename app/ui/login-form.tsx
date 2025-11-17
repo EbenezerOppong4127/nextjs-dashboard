@@ -1,5 +1,5 @@
 'use client';
- 
+
 import { lusitana } from '@/app/ui/fonts';
 import {
   AtSymbolIcon,
@@ -28,18 +28,18 @@ function GoogleSignIn() {
       <br />
       As this is a <b>test project</b>, I cannot provide all the necessary <b>bureaucracy</b>.
     </>
-  , {
-    autoClose: 15000
-  });
+    , {
+      autoClose: 15000
+    });
 }
- 
+
 export default function LoginForm() {
   const [errorMessage, dispatch] = useFormState(authenticateWithCredentials, undefined);
 
   const searchParams = useSearchParams();
   const params = {
     accountCreated: searchParams.get('account-created'),
-    passwordUpdated: searchParams.get('password-updated') 
+    passwordUpdated: searchParams.get('password-updated')
   };
 
   useEffect(() => {
@@ -51,18 +51,18 @@ export default function LoginForm() {
     }
     if (!params.accountCreated && !params.passwordUpdated) {
       toast.warning(<><b>Note</b>: accounts are now automatically <b>deleted</b> after <b>one week</b>.</>);
-    } 
-  }, []);
+    }
+  }, [params.accountCreated, params.passwordUpdated]); // Fixed: Added missing dependencies
 
   return (
     <div className={`flex-1 rounded-lg ${systemDefault.container}
         px-6 pb-4 pt-8
       `}>
-        <ToastContainer theme="colored" />
-        <h1 className={`${lusitana.className} mb-3 text-2xl ${systemDefault.title}`}>
-          Please log in to continue.
-        </h1>
-      <form action={dispatch} className="space-y-3">  
+      <ToastContainer theme="colored" />
+      <h1 className={`${lusitana.className} mb-3 text-2xl ${systemDefault.title}`}>
+        Please log in to continue.
+      </h1>
+      <form action={dispatch} className="space-y-3">
         <div className="w-full">
           <div>
             <label
@@ -116,9 +116,9 @@ export default function LoginForm() {
             </div>
           </div>
         </div>
-        
+
         <LoginButton />
-        
+
         {errorMessage && (
           <div
             className="flex h-8 items-end space-x-1"
@@ -129,7 +129,7 @@ export default function LoginForm() {
             <p className="text-sm text-red-500">{errorMessage}</p>
           </div>
         )}
-        
+
       </form>
 
       <CreateAccount />
@@ -146,10 +146,10 @@ export default function LoginForm() {
     </div>
   );
 }
- 
+
 function LoginButton() {
   const { pending } = useFormStatus();
- 
+
   return (
     <Button className="mt-4 w-full" aria-disabled={pending}>
       Log in <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
@@ -159,9 +159,9 @@ function LoginButton() {
 
 function CreateAccount() {
   const { pending } = useFormStatus();
-  
+
   const { replace } = useRouter();
- 
+
   return (
     <Button className="mt-2 w-full" aria-disabled={pending} onClick={() => {
       replace('/create-account');
@@ -173,9 +173,9 @@ function CreateAccount() {
 
 function ForgotPassword() {
   const { pending } = useFormStatus();
-  
+
   const { replace } = useRouter();
- 
+
   return (
     <Button className="mt-2 w-full" aria-disabled={pending} onClick={() => {
       replace('/forgot');

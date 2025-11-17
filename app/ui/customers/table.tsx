@@ -12,7 +12,7 @@ export default async function CustomersTable({
   currentPage: number;
   theme: themeType;
 }) {
-  let customers = [];
+  let customers: any[] = [];
   try {
     customers = await fetchFilteredCustomers(query, currentPage) || [];
   } catch (error) {

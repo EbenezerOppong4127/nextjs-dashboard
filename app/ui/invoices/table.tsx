@@ -13,7 +13,7 @@ export default async function InvoicesTable({
   currentPage: number;
   theme: themeType;
 }) {
-  let invoices = [];
+  let invoices: any[] = [];
   try {
     invoices = await fetchFilteredInvoices(query, currentPage) || [];
   } catch (error) {
