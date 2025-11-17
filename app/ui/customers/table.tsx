@@ -2,6 +2,7 @@ import Search from '@/app/ui/search';
 import { fetchFilteredCustomers } from '@/app/lib/data';
 import { CreateCustomer, DeleteCustomer, UpdateCustomer } from '../invoices/buttons';
 import { themeType } from '@/app/lib/theme';
+import { FormattedCustomersTable } from '@/app/lib/definitions';
 
 export default async function CustomersTable({
   query,
@@ -12,9 +13,10 @@ export default async function CustomersTable({
   currentPage: number;
   theme: themeType;
 }) {
-  let customers = [];
+  let customers: FormattedCustomersTable[] = [];
   try {
-    customers = await fetchFilteredCustomers(query, currentPage) || [];
+    const fetchedCustomers = await fetchFilteredCustomers(query, currentPage);
+    customers = fetchedCustomers || [];
   } catch (error) {
     console.error('Error fetching customers:', error);
     customers = [];
