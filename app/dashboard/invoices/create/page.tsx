@@ -12,7 +12,7 @@ export default async function Page() {
   // Use default light theme since auth is removed
   const theme: themeType = lightTheme;
 
-  let customers = [];
+  let customers: any[] = [];
   try {
     customers = await fetchCustomers() || [];
   } catch (error) {
