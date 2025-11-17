@@ -64,35 +64,35 @@ export default function Page() {
                         </p>
 
                         <Link
-                            href="http://localhost:3000/dashboard"
+                            href="https://nextjs-dashboard-indol-beta-62.vercel.app/dashboard"
                             className="flex items-center gap-3 rounded-lg bg-blue-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-400"
                         >
                             <span>Dashboard Home</span> <ArrowRightIcon className="w-4" />
                         </Link>
 
                         <Link
-                            href="http://localhost:3000/dashboard/invoices"
+                            href="https://nextjs-dashboard-indol-beta-62.vercel.app/dashboard/invoices"
                             className="flex items-center gap-3 rounded-lg bg-blue-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-400"
                         >
                             <span>View Invoices</span> <ArrowRightIcon className="w-4" />
                         </Link>
 
                         <Link
-                            href="http://localhost:3000/dashboard/customers"
+                            href="https://nextjs-dashboard-indol-beta-62.vercel.app/dashboard/customers"
                             className="flex items-center gap-3 rounded-lg bg-blue-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-400"
                         >
                             <span>View Customers</span> <ArrowRightIcon className="w-4" />
                         </Link>
 
                         <Link
-                            href="http://localhost:3000/dashboard/user-profile"
+                            href="https://nextjs-dashboard-indol-beta-62.vercel.app/dashboard/user-profile"
                             className="flex items-center gap-3 rounded-lg bg-blue-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-400"
                         >
                             <span>User Profile</span> <ArrowRightIcon className="w-4" />
                         </Link>
 
                         <Link
-                            href="http://localhost:3000/dashboard/settings"
+                            href="https://nextjs-dashboard-indol-beta-62.vercel.app/dashboard/settings"
                             className="flex items-center gap-3 rounded-lg bg-blue-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-400"
                         >
                             <span>Settings</span> <ArrowRightIcon className="w-4" />
