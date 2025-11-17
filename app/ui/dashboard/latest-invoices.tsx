@@ -5,7 +5,7 @@ import { fetchLatestInvoices } from '@/app/lib/data';
 import { themeType } from '@/app/lib/theme';
 
 export default async function LatestInvoices({theme}:{theme: themeType}) {
-  let latestInvoices = [];
+  let latestInvoices: any[] = [];
   try {
     latestInvoices = await fetchLatestInvoices() || [];
   } catch (error) {
