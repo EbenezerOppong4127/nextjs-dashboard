@@ -3,6 +3,7 @@ import Breadcrumbs from '@/app/ui/invoices/breadcrumbs';
 import { fetchCustomers } from '@/app/lib/data';
 import { Metadata } from 'next';
 import { lightTheme, themeType } from '@/app/lib/theme';
+import { CustomerField } from '@/app/lib/definitions';
 
 export const metadata: Metadata = {
   title: 'Create Invoice',
@@ -12,9 +13,10 @@ export default async function Page() {
   // Use default light theme since auth is removed
   const theme: themeType = lightTheme;
 
-  let customers: any[] = [];
+  let customers: CustomerField[] = [];
   try {
-    customers = await fetchCustomers() || [];
+    const fetchedCustomers = await fetchCustomers();
+    customers = fetchedCustomers || [];
   } catch (error) {
     console.error('Error fetching customers:', error);
     customers = [];

@@ -3,6 +3,7 @@ import InvoiceStatus from '@/app/ui/invoices/status';
 import { formatDateToLocal, formatCurrency } from '@/app/lib/utils';
 import { fetchFilteredInvoices } from '@/app/lib/data';
 import { themeType } from '@/app/lib/theme';
+import { InvoicesTable } from '@/app/lib/definitions';
 
 export default async function InvoicesTable({
   query,
@@ -13,9 +14,10 @@ export default async function InvoicesTable({
   currentPage: number;
   theme: themeType;
 }) {
-  let invoices = [];
+  let invoices: InvoicesTable[] = [];
   try {
-    invoices = await fetchFilteredInvoices(query, currentPage) || [];
+    const fetchedInvoices = await fetchFilteredInvoices(query, currentPage);
+    invoices = fetchedInvoices || [];
   } catch (error) {
     console.error('Error fetching invoices:', error);
     invoices = [];
