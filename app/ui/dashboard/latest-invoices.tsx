@@ -2,14 +2,16 @@ import { ArrowPathIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import { lusitana } from '@/app/ui/fonts';
 import { fetchLatestInvoices } from '@/app/lib/data';
-import { auth } from '@/auth';
 import { themeType } from '@/app/lib/theme';
 
 export default async function LatestInvoices({theme}:{theme: themeType}) {
-  const session = await auth();
-  const userEmail = session?.user?.email!;
-
-  const latestInvoices = await fetchLatestInvoices(userEmail);
+  let latestInvoices = [];
+  try {
+    latestInvoices = await fetchLatestInvoices() || [];
+  } catch (error) {
+    console.error('Error fetching latest invoices:', error);
+    latestInvoices = [];
+  }
 
   return (
     <div className="flex w-full flex-col md:col-span-4">
@@ -22,7 +24,8 @@ export default async function LatestInvoices({theme}:{theme: themeType}) {
         {/* NOTE: comment in this code when you get to this point in the course */}
 
         <div className={`${theme.bg} px-6`}>
-          {latestInvoices.map((invoice, i) => {
+          {latestInvoices && latestInvoices.length > 0 ? (
+            latestInvoices.map((invoice, i) => {
             return (
               <div
                 key={invoice.id}
@@ -53,7 +56,12 @@ export default async function LatestInvoices({theme}:{theme: themeType}) {
                 </p>
               </div>
             );
-          })}
+          })
+          ) : (
+            <div className="py-8 text-center">
+              <p className={`text-sm ${theme.text}`}>No invoices found.</p>
+            </div>
+          )}
         </div>
         <div className="flex items-center pb-2 pt-6">
           <ArrowPathIcon className="h-5 w-5 text-gray-500" />

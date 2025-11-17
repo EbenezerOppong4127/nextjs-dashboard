@@ -5,11 +5,9 @@ import {
   InvoiceForm,
   InvoicesTable,
   LatestInvoiceRaw,
-  LatestInvoice,
   User,
   Revenue,
   CustomerForm,
-  FormattedCustomersTable,
 } from './definitions';
 import { formatCurrency } from './utils';
 import { unstable_noStore as noStore } from 'next/cache';
@@ -72,7 +70,7 @@ export async function fetchRevenue() {
   }
 }
 
-export async function fetchLatestInvoices(): Promise<LatestInvoice[]> {
+export async function fetchLatestInvoices() {
   noStore();
   
   try {
@@ -146,7 +144,7 @@ export async function fetchCardData() {
 export async function fetchFilteredInvoices(
   query: string,
   currentPage: number
-): Promise<InvoicesTable[]> {
+) {
   noStore();
 
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
@@ -235,7 +233,7 @@ export async function fetchInvoiceById(id: string) {
   }
 }
 
-export async function fetchCustomers(): Promise<CustomerField[]> {
+export async function fetchCustomers() {
   noStore();
 
   try {
@@ -255,7 +253,7 @@ export async function fetchCustomers(): Promise<CustomerField[]> {
   }
 }
 
-export async function fetchFilteredCustomers(query: string, currentPage: number): Promise<FormattedCustomersTable[]> {
+export async function fetchFilteredCustomers(query: string, currentPage: number) {
   noStore();
 
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;

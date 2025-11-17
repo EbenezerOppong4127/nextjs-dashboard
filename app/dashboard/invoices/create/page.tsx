@@ -8,20 +8,19 @@ import { CustomerField } from '@/app/lib/definitions';
 export const metadata: Metadata = {
   title: 'Create Invoice',
 };
- 
+
 export default async function Page() {
   // Use default light theme since auth is removed
   const theme: themeType = lightTheme;
 
   let customers: CustomerField[] = [];
   try {
-    const fetchedCustomers = await fetchCustomers();
-    customers = fetchedCustomers || [];
+    customers = (await fetchCustomers()) || [];
   } catch (error) {
     console.error('Error fetching customers:', error);
     customers = [];
   }
- 
+
   return (
     <main>
       <Breadcrumbs
