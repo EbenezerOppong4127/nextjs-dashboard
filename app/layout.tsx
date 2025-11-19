@@ -1,33 +1,30 @@
-import '@/app/ui/global.css';
-import { inter } from '@/app/ui/fonts';
+import '@/components/ui/global.css';
+
 import { Metadata } from 'next';
-import { systemDefault } from './lib/theme'
+import { montserrat } from '@/components/ui/fonts';
 
-
- 
 export const metadata: Metadata = {
-  title: {
-    template: '%s | Acme Dashboard',
-    default: 'Acme Dashboard',
-  },
-  metadataBase: new URL('https://josiasbudaydeveloper-next-14-dashboard-app.vercel.app/'),
-  description: 'A Dashboard App where users can create an account (with their credentials or using an OAuth provider), create customers and assign invoices to them. Invoices will be shown at the Dashboard page as a summary. This project is based on the Next Learn Course, the official Next.js 14 tutorial and created by Vercel.',
-  openGraph: {
-    title: 'Dashboard App, created by Vercel and modified by Josias Buday Developer',
-    description: 'A Dashboard App where users can create an account (with their credentials or using an OAuth provider), create customers and assign invoices to them. Invoices will be shown at the Dashboard page as a summary. This project is based on the Next Learn Course, the official Next.js 14 tutorial and created by Vercel.',
-    siteName: 'Acme Dashboard',
-    locale: 'en_US'
-  }
+   title: {
+      template: '%s | Acme Dashboard',
+      default: 'Acme Dashboard',
+   },
+   description: 'The official Next.js Learn Dashboard built with App Router.',
+   metadataBase: new URL('https://next-learn-dashboard.vercel.sh'),
 };
- 
+
 export default function RootLayout({
-  children,
+   children,
 }: {
-  children: React.ReactNode;
+   children: React.ReactNode;
 }) {
-  return (
-    <html lang="en">
-      <body className={`${inter.className} antialiased ${systemDefault.bg}`}>{children}</body>
-    </html>
-  );
+   return (
+      <html lang='en'>
+         <body
+            suppressHydrationWarning={true}
+            className={`${montserrat.className} antialiased`}
+         >
+            {children}
+         </body>
+      </html>
+   );
 }
